@@ -16,6 +16,8 @@ wheels/
 # Terraform state
 *.tfstate
 *.tfstate.backup
+.terraform/
+.terraform.lock.hcl
 
 # Variables
 variables.tf
