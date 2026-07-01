@@ -1,0 +1,12 @@
+[project]
+name = "curated-collections-deploy"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "python-glanceclient>=4.10.0",
+    "python-novaclient>=18.11.0",
+    "python-openstackclient>=8.2.0",
+    "python-swiftclient>=4.8.0",
+]
