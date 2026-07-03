@@ -5,8 +5,9 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "python-designateclient>=7.0.0",
     "python-glanceclient>=4.10.0",
     "python-novaclient>=18.11.0",
-    "python-openstackclient>=8.2.0",
+    "python-openstackclient>=10.1.0",
     "python-swiftclient>=4.8.0",
 ]
