@@ -11,6 +11,7 @@ resource "openstack_compute_instance_v2" "instance" {
         uuid = openstack_networking_network_v2.private_network.id
     }
     availability_zone = "ardc-syd-1"
+    user_data = file("${path.module}/test_init.sh")
 }
 
 
