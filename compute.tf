@@ -23,3 +23,4 @@ resource "openstack_networking_floatingip_v2" "floatip" {
   port_id = data.openstack_networking_port_v2.port.port_id
 }
 
+
