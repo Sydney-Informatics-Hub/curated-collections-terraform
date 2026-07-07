@@ -20,10 +20,6 @@ write_files:
     owner: ubuntu:
     encoding: b64
     content: ${base64encode(docker_compose_content)}
-  - path: /home/ubuntu/omeka-s/init-db/init-db.sql
-    owner: ubuntu:
-    encoding: b64
-    content: ${base64encode(init_db_content)}
   - path: /home/ubuntu/omeka-s/secrets/mariadb_password
     permissions: '0400'
     owner: ubuntu:ubuntu
@@ -65,5 +61,7 @@ write_files:
     owner: ubuntu:ubuntu
     content: ${omeka_site_slug}
 runcmd:
-  - cd /home/ubuntu/omeka-s
-  - docker compose up -d
+  - [ mkdir, -p, /home/ubuntu/omeka-s/init-db ]
+  - [ curl, -fsSL, /home/ubuntu/omeka-s/init-db/init-db.sql, "${init_db_url} ]
+  - [ cd, /home/ubuntu/omeka-s ]
+  - [ docker, compose, up, -d ]
