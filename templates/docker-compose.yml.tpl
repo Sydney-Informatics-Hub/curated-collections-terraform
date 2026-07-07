@@ -1,0 +1,99 @@
+name: omeka-s
+
+services:
+  caddy:
+    image: caddy:2.10.2
+    depends_on:
+      - omeka-s-app
+    volumes:
+      - caddy-data:/data
+      - caddy-config:/config
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    ports:
+      - '80:80'
+      - '443:443'
+    networks:
+      - omeka-s-network
+
+  omeka-s-app:
+    image: ${omeka_s_image}
+    depends_on:
+      omeka-s-db:
+        condition: service_healthy
+    volumes:
+      - omeka-s-app:/var/www/html
+    secrets:
+      - mariadb_password
+      - omeka_admin_user
+      - omeka_admin_email
+      - omeka_admin_password
+      - omeka_build_admin_email
+      - omeka_project_title
+      - omeka_site_title
+      - omeka_site_slug
+      - omeka_build_site_slug
+    environment:
+      MARIADB_DATABASE: omekas
+      MARIADB_USER: omekas
+      MARIADB_HOST: omeka-s-db
+      MARIADB_PORT: 3306
+    ports:
+      - '127.0.0.1:8080:80'
+    networks:
+      - omeka-s-network
+    command: /docker-entrypoint.sh
+    restart: unless-stopped
+
+  omeka-s-db:
+    image: mariadb:12.2.1-noble-rc
+    volumes:
+      - omeka-s-db:/var/lib/mysql
+      - ./db-init:/docker-entrypoint-initdb.d
+    secrets:
+      - mariadb_password
+      - mariadb_root_password
+    environment:
+      MARIADB_DATABASE: omekas
+      MARIADB_USER: omekas
+      MARIADB_PASSWORD_FILE: /run/secrets/mariadb_password
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/mariadb_root_password
+    networks:
+      - omeka-s-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      retries: 10
+
+networks:
+  omeka-s-network:
+    driver: bridge
+    name: "omeka-s-network"
+
+volumes:
+  omeka-s-db:
+  omeka-s-app:
+  caddy-data:
+  caddy-config:
+
+secrets:
+  mariadb_password:
+    file: secrets/mariadb_password.txt
+  mariadb_root_password:
+    file: secrets/mariadb_root_password.txt
+  omeka_admin_user:
+    file: secrets/omeka_admin_user.txt
+  omeka_admin_email:
+    file: secrets/omeka_admin_email.txt
+  omeka_admin_password:
+    file: secrets/omeka_admin_password.txt
+  omeka_project_title:
+    file: secrets/omeka_project_title.txt
+  omeka_build_admin_email:
+    file: secrets/build/omeka_admin_email.txt
+  omeka_site_title:
+    file: secrets/omeka_site_title.txt
+  omeka_site_slug:
+    file: secrets/omeka_site_slug.txt
+  omeka_build_site_slug:
+    file: secrets/build/omeka_site_slug.txt
