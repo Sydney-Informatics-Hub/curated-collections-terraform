@@ -45,10 +45,9 @@ services:
     restart: unless-stopped
 
   omeka-s-db:
-    image: mariadb:12.2.1-noble-rc
+    image: ${mariadb_image}
     volumes:
       - omeka-s-db:/var/lib/mysql
-      - ./db-init:/docker-entrypoint-initdb.d
     secrets:
       - mariadb_password
       - mariadb_root_password
