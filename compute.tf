@@ -12,7 +12,20 @@ resource "openstack_compute_instance_v2" "instance" {
     }
     availability_zone = "ardc-syd-1"
     user_data = templatefile("${path.module}/templates/cloud-init.yaml.tpl", {
-        hostname = "${local.hostname}"
+        hostname = local.hostname
+        mariadb_password = random_password.mariadb_password.result
+        mariadb_root_password = random_password.mariadb_root_password.result
+        omeka_build_admin_email = local.omeka_build_admin_email
+        omeka_admin_email = local.omeka_admin_email
+        omeka_admin_user = local.omeka_admin_user
+        omeka_admin_password = random_password.omeka_admin_password.result
+	omeka_build_site_slug = local.omeka_build_site_slug
+	omeka_project_title = local.omeka_project_title
+        omeka_site_slug = local.omeka_site_slug
+        omeka_site_title = local.omeka_site_title
+        caddyfile_content = local.caddyfile_content
+        docker_compose_content = local.docker_compose_content
+        init_db_content = local.init_db_content
     })
 }
 

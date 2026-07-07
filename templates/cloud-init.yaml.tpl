@@ -64,3 +64,6 @@ write_files:
     permissions: '0400'
     owner: ubuntu:ubuntu
     content: ${omeka_site_slug}
+runcmd:
+  - cd /home/ubuntu/omeka-s
+  - docker compose up -d
