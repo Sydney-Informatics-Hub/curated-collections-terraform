@@ -25,7 +25,6 @@ resource "openstack_compute_instance_v2" "instance" {
         omeka_site_title = local.omeka_site_title
         caddyfile_content = local.caddyfile_content
         docker_compose_content = local.docker_compose_content
-        init_db_url = resource.openstack_objectstorage_tempurl_v1.init_db_url.url
     })
 }
 
