@@ -36,3 +36,7 @@ write_files:
     content: "${omeka_site_title}"
   - path: /home/ubuntu/omeka-s/secrets/omeka_site_slug.txt
     content: "${omeka_site_slug}"
+
+runcmd:
+  - [ cd, /home/ubuntu/omeka-s ]
+  - [ docker, compose, up, -d ]
