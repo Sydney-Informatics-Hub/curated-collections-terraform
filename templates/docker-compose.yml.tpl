@@ -89,10 +89,10 @@ secrets:
   omeka_project_title:
     file: secrets/omeka_project_title.txt
   omeka_build_admin_email:
-    file: secrets/build/omeka_admin_email.txt
+    file: secrets/omeka_build_admin_email.txt
   omeka_site_title:
     file: secrets/omeka_site_title.txt
   omeka_site_slug:
     file: secrets/omeka_site_slug.txt
   omeka_build_site_slug:
-    file: secrets/build/omeka_site_slug.txt
+    file: secrets/omeka_build_site_slug.txt
