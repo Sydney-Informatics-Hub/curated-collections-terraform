@@ -4,10 +4,6 @@ terraform {
             source = "terraform-provider-openstack/openstack"
             version = "3.4.0"
         }
-#	docker = {
-#            source = "kreuzwerker/docker"
-#            version = "3.9.0"
-#        }
     }
     required_version = ">= 0.13"
 }
@@ -20,5 +16,4 @@ provider "openstack" {
     auth_url = "https://identity.rc.nectar.org.au/v3/"
 }
 
-#provider "docker" {
-#}
+
