@@ -9,7 +9,7 @@ locals {
     	tls_admin_email = "m.lynch@sydney.edu.au"
     })
     docker_compose_content = templatefile("${path.module}/templates/docker-compose.yml.tpl", {
-    	omeka_s_image = "registry.rc.nectar.org.au/curated-collections/cc-omeka-s@sha256:deda963608fd34aa4c8caa803e39473f275510a88297bbdb063ca854199c4ecb"
+    	omeka_s_image = "registry.rc.nectar.org.au/curated-collections/cc-omeka-s@sha256:54f1cffbd4d7370d70cdfdf48bff325b3b17792993f9e85d702e397a9cda3c54"
         mariadb_image = "registry.rc.nectar.org.au/curated-collections/cc-mariadb@sha256:229b104057cb01fda97422356cd1f8e0d7de2445066d4cba39d1b6873294424c"
     })
     omeka_admin_email = "m.lynch@sydney.edu.au"
