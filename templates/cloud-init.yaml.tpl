@@ -11,57 +11,28 @@ system_info:
 
 write_files:
   - path: /home/ubuntu/omeka-s/Caddyfile
-    permissions: '0644'
-    owner: ubuntu:
     encoding: b64
-    content: ${base64encode(caddyfile_content)}
+    content: "${base64encode(caddyfile_content)}"
   - path: /home/ubuntu/omeka-s/docker-compose.yml
-    permissions: '0644'
-    owner: ubuntu:
     encoding: b64
-    content: ${base64encode(docker_compose_content)}
-  - path: /home/ubuntu/omeka-s/secrets/mariadb_password
-    permissions: '0400'
-    owner: ubuntu:ubuntu
-    content: ${mariadb_password}
-  - path: /home/ubuntu/omeka-s/secrets/mariadb_root_password
-    permissions: '0400'
-    owner: ubuntu:ubuntu
-    content: ${mariadb_root_password}
-  - path: /home/ubuntu/omeka-s/secrets/omeka_build_admin_email
-    permissions: '0400'
-    owner: ubuntu:ubuntu
-    content: ${omeka_build_admin_email}
-  - path: /home/ubuntu/omeka-s/secrets/omeka_admin_email
-    permissions: '0400'
-    owner: ubuntu:ubuntu
-    content: ${omeka_admin_email}
-  - path: /home/ubuntu/omeka-s/secrets/omeka_admin_user
-    permissions: '0400'
-    owner: ubuntu:ubuntu
-    content: ${omeka_admin_user}
-  - path: /home/ubuntu/omeka-s/secrets/omeka_admin_password
-    permissions: '0400'
-    owner: ubuntu:ubuntu
-    content: ${omeka_admin_password}
-  - path: /home/ubuntu/omeka-s/secrets/omeka_build_site_slug
-    permissions: '0400'
-    owner: ubuntu:ubuntu
-    content: ${omeka_build_site_slug}
-  - path: /home/ubuntu/omeka-s/secrets/omeka_project_title
-    permissions: '0400'
-    owner: ubuntu:ubuntu
-    content: ${omeka_project_title}
-  - path: /home/ubuntu/omeka-s/secrets/omeka_site_title
-    permissions: '0400'
-    owner: ubuntu:ubuntu
-    content: ${omeka_site_title}
-  - path: /home/ubuntu/omeka-s/secrets/omeka_site_slug
-    permissions: '0400'
-    owner: ubuntu:ubuntu
-    content: ${omeka_site_slug}
-runcmd:
-  - [ mkdir, -p, /home/ubuntu/omeka-s/init-db ]
-  - [ curl, -fsSL, /home/ubuntu/omeka-s/init-db/init-db.sql, "${init_db_url} ]
-  - [ cd, /home/ubuntu/omeka-s ]
-  - [ docker, compose, up, -d ]
+    content: "${base64encode(docker_compose_content)}"
+  - path: /home/ubuntu/omeka-s/secrets/mariadb_password.txt
+    content: "${mariadb_password}"
+  - path: /home/ubuntu/omeka-s/secrets/mariadb_root_password.txt
+    content: "${mariadb_root_password}"
+  - path: /home/ubuntu/omeka-s/secrets/omeka_build_admin_email.txt
+    content: "${omeka_build_admin_email}"
+  - path: /home/ubuntu/omeka-s/secrets/omeka_admin_email.txt
+    content: "${omeka_admin_email}"
+  - path: /home/ubuntu/omeka-s/secrets/omeka_admin_user.txt
+    content: "${omeka_admin_user}"
+  - path: /home/ubuntu/omeka-s/secrets/omeka_admin_password.txt
+    content: "${omeka_admin_password}"
+  - path: /home/ubuntu/omeka-s/secrets/omeka_build_site_slug.txt
+    content: "${omeka_build_site_slug}"
+  - path: /home/ubuntu/omeka-s/secrets/omeka_project_title.txt
+    content: "${omeka_project_title}"
+  - path: /home/ubuntu/omeka-s/secrets/omeka_site_title.txt
+    content: "${omeka_site_title}"
+  - path: /home/ubuntu/omeka-s/secrets/omeka_site_slug.txt
+    content: "${omeka_site_slug}"
