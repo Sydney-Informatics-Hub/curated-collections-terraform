@@ -24,3 +24,11 @@ resource "random_password" "omeka_admin_password" {
   lower    = true
   numeric  = true
 }
+
+output "omeka_admin_password" {
+  value       = random_password.omeka_admin_password.result
+  sensitive   = true
+  description = "Omeka S admin password"
+}
+
+
