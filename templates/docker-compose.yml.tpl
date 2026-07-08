@@ -16,7 +16,7 @@ services:
       - omeka-s-network
 
   omeka-s-app:
-    image: ${omeka_s_image}
+    image: "${omeka_s_image}"
     depends_on:
       omeka-s-db:
         condition: service_healthy
@@ -45,7 +45,7 @@ services:
     restart: unless-stopped
 
   omeka-s-db:
-    image: ${mariadb_image}
+    image: "${mariadb_image}"
     volumes:
       - omeka-s-db:/var/lib/mysql
     secrets:
