@@ -14,6 +14,7 @@ services:
       - '443:443'
     networks:
       - omeka-s-network
+    restart: unless-stopped
 
   omeka-s-app:
     image: "${omeka_s_image}"
