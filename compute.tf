@@ -23,6 +23,12 @@ resource "openstack_compute_instance_v2" "instance" {
 	omeka_project_title = local.omeka_project_title
         omeka_site_slug = local.omeka_site_slug
         omeka_site_title = local.omeka_site_title
+        oidc_base_url = local.oidc_base_url
+	oidc_discovery_url = local.oidc_discovery_url
+        oidc_client_id = local.oidc_client_id
+        oidc_client_secret = local.oidc_client_secret
+        oidc_access_claim = local.oidc_access_claim
+	oidc_access_value = local.oidc_access_value
         caddyfile_content = local.caddyfile_content
         docker_compose_content = local.docker_compose_content
     })

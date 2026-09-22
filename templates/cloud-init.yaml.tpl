@@ -36,6 +36,19 @@ write_files:
     content: "${omeka_site_title}"
   - path: /home/ubuntu/omeka-s/secrets/omeka_site_slug.txt
     content: "${omeka_site_slug}"
+  - path: /home/ubuntu/omeka-s/secrets/oidc_base_url.txt
+    content: "${oidc_base_url}"
+  - path: /home/ubuntu/omeka-s/secrets/oidc_discovery_url.txt
+    content: "${oidc_discovery_url}"
+  - path: /home/ubuntu/omeka-s/secrets/oidc_client_id.txt
+    content: "${oidc_client_id}"
+  - path: /home/ubuntu/omeka-s/secrets/oidc_client_secret.txt
+    content: "${oidc_client_secret}"
+  - path: /home/ubuntu/omeka-s/secrets/oidc_access_claim.txt
+    content: "${oidc_access_claim}"
+  - path: /home/ubuntu/omeka-s/secrets/oidc_access_value.txt
+    content: "${oidc_access_value}"
+
 
 runcmd:
   - [ cd, /home/ubuntu/omeka-s ]

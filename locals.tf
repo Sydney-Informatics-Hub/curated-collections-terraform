@@ -6,10 +6,11 @@
 locals {
     omeka_build_admin_email = "admin-tmp@curated-collections.edu.au"
     omeka_build_site_slug = "temp-site"
-    cc_prefix = "cc-${local.cc_project_id}"
-    hostname = "${local.cc_project_id}.${var.cc_domain}"
+    cc_prefix = "cc-${var.cc_project_id}"
+    hostname = "${var.cc_project_id}.${var.cc_domain}"
+    base_url = "https://${local.hostname}"
     caddyfile_content = templatefile("${path.module}/templates/Caddyfile.tpl", {
-	hostname = "${local.cc_project_id}.${var.cc_domain}"
+	hostname = "${var.cc_project_id}.${var.cc_domain}"
     	tls_admin_email = "m.lynch@sydney.edu.au"
     })
     docker_compose_content = templatefile("${path.module}/templates/docker-compose.yml.tpl", {
