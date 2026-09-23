@@ -8,6 +8,12 @@ variable "cc_project_id" {
     type = string
 }
 
+variable "cilogon_group" {
+    description = "The name of the CILogon group whose membership defines who gets to log in to this project"
+    default = "example"
+    type = string
+}
+
 variable "omeka_admin_email" {
     description = "Email address for the local admin account"
     default = "example@curated-collections.cloud.edu.au"
@@ -38,13 +44,4 @@ variable "omeka_site_slug" {
     type = string
 }
 
-
-locals {
-    cc_project_id = "testbed"
-    omeka_admin_email = "actual_admin_email@institution.org"
-    omeka_admin_user = "Admin User"
-    omeka_project_title = "Omeka Project"
-    omeka_site_title = "Site"
-    omeka_site_slug = "site"
-}
 

@@ -17,9 +17,3 @@ variable "nectar_project_name" {
     default = "***NECTAR PROJECT NAME***"
 }
 
-variable "cc_project_id" {
-    description = "A unique ID for the omeka project"
-    default = "testbed"
-    type = string
-}
-

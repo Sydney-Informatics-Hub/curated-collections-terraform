@@ -16,6 +16,9 @@ write_files:
   - path: /home/ubuntu/omeka-s/docker-compose.yml
     encoding: b64
     content: "${base64encode(docker_compose_content)}"
+  - path: /home/ubuntu/omeka-s/secrets/oidc_config.json
+    encoding: b64
+    content: "${base64encode(oidc_config_content)}"
   - path: /home/ubuntu/omeka-s/secrets/mariadb_password.txt
     content: "${mariadb_password}"
   - path: /home/ubuntu/omeka-s/secrets/mariadb_root_password.txt
@@ -36,18 +39,6 @@ write_files:
     content: "${omeka_site_title}"
   - path: /home/ubuntu/omeka-s/secrets/omeka_site_slug.txt
     content: "${omeka_site_slug}"
-  - path: /home/ubuntu/omeka-s/secrets/oidc_base_url.txt
-    content: "${oidc_base_url}"
-  - path: /home/ubuntu/omeka-s/secrets/oidc_discovery_url.txt
-    content: "${oidc_discovery_url}"
-  - path: /home/ubuntu/omeka-s/secrets/oidc_client_id.txt
-    content: "${oidc_client_id}"
-  - path: /home/ubuntu/omeka-s/secrets/oidc_client_secret.txt
-    content: "${oidc_client_secret}"
-  - path: /home/ubuntu/omeka-s/secrets/oidc_access_claim.txt
-    content: "${oidc_access_claim}"
-  - path: /home/ubuntu/omeka-s/secrets/oidc_access_value.txt
-    content: "${oidc_access_value}"
 
 
 runcmd:

@@ -33,6 +33,7 @@ services:
       - omeka_site_title
       - omeka_site_slug
       - omeka_build_site_slug
+      - oidc_config
     environment:
       MARIADB_DATABASE: omekas
       MARIADB_USER: omekas
@@ -97,3 +98,5 @@ secrets:
     file: secrets/omeka_site_slug.txt
   omeka_build_site_slug:
     file: secrets/omeka_build_site_slug.txt
+  oidc_config:
+    file: secrets/oidc_config.json
