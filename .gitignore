@@ -21,6 +21,7 @@ wheels/
 
 # Variables
 variables.tf
+oidc-variables.tf
 
 # Openrc
 
