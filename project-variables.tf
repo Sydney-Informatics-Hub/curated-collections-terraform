@@ -4,13 +4,13 @@
 
 variable "cc_project_id" {
     description = "A unique ID for the omeka project, which is used to build the site's hostname"
-    default = "example"
+    default = "testbed"
     type = string
 }
 
 variable "cilogon_group" {
     description = "The name of the CILogon group whose membership defines who gets to log in to this project"
-    default = "example"
+    default = "testbed-project-members"
     type = string
 }
 
@@ -28,7 +28,7 @@ variable "omeka_admin_user" {
 
 variable "omeka_project_title" {
     description = "The title for the Omeka instance"
-    default = "Project Title"
+    default = "Curated Collections Testbed"
     type = string
 }
 
