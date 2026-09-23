@@ -27,7 +27,7 @@ locals {
   	discovery_url = "${var.oidc_discovery_url}"
         client_id = "${var.oidc_client_id}"
 	client_secret = "${var.oidc_client_secret}"
-	cilogon_group = "{$var.cilogon_group}"
+	cilogon_group = "${var.cilogon_group}"
     })
 }
 
