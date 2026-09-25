@@ -22,12 +22,16 @@ locals {
     	omeka_s_image = "${var.omeka_s_image}"
         mariadb_image = "${var.mariadb_image}"
     })
-    oidc_config_content = templatefile("${path.module}/templates/oidc_config.json.tpl", {
-    	base_url = "${local.base_url}"
-  	discovery_url = "${var.oidc_discovery_url}"
-        client_id = "${var.oidc_client_id}"
-	client_secret = "${var.oidc_client_secret}"
-	cilogon_group = "${var.cilogon_group}"
+    oidc_config_content = jsonencode({
+    	oidc_base_url = "${local.base_url}"
+  	oidc_idp_discovery_url = "${var.oidc_idp_discovery_url}"
+        oidc_client_id = "${var.oidc_client_id}"
+	oidc_client_secret = "${var.oidc_client_secret}"
+        oidc_access_guard_claim = "isMemberOf"
+        oidc_access_guard_value = "${var.cilogon_group}"
+        oidc_hide_local_login = var.oidc_hide_local_login
+        oidc_roles_map = var.oidc_roles_map
+        oidc_roles_default = ""
     })
 }
 

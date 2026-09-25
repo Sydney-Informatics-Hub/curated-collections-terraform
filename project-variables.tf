@@ -14,6 +14,21 @@ variable "cilogon_group" {
     type = string
 }
 
+variable "oidc_roles_map" {
+    description = "A map of CILogon groups to Omeka S roles"
+    type  = map(string)
+    default = {
+        "testbed-project-admins"      = "global_admin"
+        "testbed-project-researchers" = "researcher"
+    }
+}
+
+variable "oidc_hide_local_login" {
+    description = "Whether to hide the option to log in with local accounts"
+    type = bool
+    default = false
+}
+
 variable "omeka_admin_email" {
     description = "Email address for the local admin account"
     default = "example@curated-collections.cloud.edu.au"
