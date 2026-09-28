@@ -27,6 +27,8 @@ cloud-init.yaml file to set up the following:
  admin user credentials, the project and site title etc (see the Configuration section below for a full list)
 - The OIDC config. Some of these are project-specific: the CILogon groups which define who can access the instance backend and mappings to Omeka S roles. Some are not (the OICD client ID and secret). Full details are in the configuration section below. 
 
+![A diagram showing what this Terraform module deploys](docs/release_one.drawio.png)
+
 To plan the installation, run
 
     > terraform plan
