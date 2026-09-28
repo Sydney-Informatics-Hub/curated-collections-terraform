@@ -1,0 +1,25 @@
+
+# OIDC variables which are the same for all CC projects.
+
+# OIDC settings which are specific to a project (the group
+# memberships which gate access and map to Omeka roles)
+# are in project-variable.tf
+
+variable "oidc_idp_discovery_url" {
+    description = "OIDC IDP discovery url"
+    type = string
+    default = "https://cilogon.aaf.edu.au/.well-known/openid-configuration"
+
+}
+
+variable "oidc_client_id" {
+    description = "OIDC client ID"
+    type = string
+    default = "CLIENT_ID"
+}
+
+variable "oidc_client_secret" {
+    description = "OIDC client secret"
+    default = "CLIENT_SECRET"
+    sensitive = true
+}
