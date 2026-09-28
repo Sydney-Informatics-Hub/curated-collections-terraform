@@ -1,19 +1,20 @@
+# Openstack and Nectar settings to be kept out of Git 
 
 variable "openstack_user" {
-    default = "***USER EMAIL***"
+    default = "USER_EMAIL"
 }
 
 variable "openstack_password" {
     description = "The password for the Tenant."
-    default = "****PASSWORD HERE****"
+    default = "USER_PASSWORD"
     sensitive = true
 }
 
 variable "nectar_project_id" {
-    default = "***NECTAR PROJECT UUID***"
+    default = "PROJECT_ID"
 }
 
 variable "nectar_project_name" {
-    default = "***NECTAR PROJECT NAME***"
+    default = "PROJECT_NAME"
 }
 

@@ -15,16 +15,17 @@ resource "openstack_compute_instance_v2" "instance" {
         hostname = local.hostname
         mariadb_password = random_password.mariadb_password.result
         mariadb_root_password = random_password.mariadb_root_password.result
-        omeka_build_admin_email = local.omeka_build_admin_email
-        omeka_admin_email = local.omeka_admin_email
-        omeka_admin_user = local.omeka_admin_user
         omeka_admin_password = random_password.omeka_admin_password.result
+        omeka_build_admin_email = local.omeka_build_admin_email
 	omeka_build_site_slug = local.omeka_build_site_slug
-	omeka_project_title = local.omeka_project_title
-        omeka_site_slug = local.omeka_site_slug
-        omeka_site_title = local.omeka_site_title
         caddyfile_content = local.caddyfile_content
         docker_compose_content = local.docker_compose_content
+	oidc_config_content = local.oidc_config_content
+        omeka_admin_email = var.omeka_admin_email
+        omeka_admin_user = var.omeka_admin_user
+	omeka_project_title = var.omeka_project_title
+        omeka_site_slug = var.omeka_site_slug
+        omeka_site_title = var.omeka_site_title
     })
 }
 

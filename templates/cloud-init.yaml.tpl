@@ -16,6 +16,9 @@ write_files:
   - path: /home/ubuntu/omeka-s/docker-compose.yml
     encoding: b64
     content: "${base64encode(docker_compose_content)}"
+  - path: /home/ubuntu/omeka-s/secrets/oidc_config.json
+    encoding: b64
+    content: "${base64encode(oidc_config_content)}"
   - path: /home/ubuntu/omeka-s/secrets/mariadb_password.txt
     content: "${mariadb_password}"
   - path: /home/ubuntu/omeka-s/secrets/mariadb_root_password.txt
@@ -36,6 +39,7 @@ write_files:
     content: "${omeka_site_title}"
   - path: /home/ubuntu/omeka-s/secrets/omeka_site_slug.txt
     content: "${omeka_site_slug}"
+
 
 runcmd:
   - [ cd, /home/ubuntu/omeka-s ]

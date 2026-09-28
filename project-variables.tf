@@ -1,0 +1,62 @@
+
+# Sample file for non-secret variables about this Omeka project.
+
+
+variable "cc_project_id" {
+    description = "A unique ID for the omeka project, which is used to build the site's hostname"
+    default = "testbed"
+    type = string
+}
+
+variable "cilogon_group" {
+    description = "The name of the CILogon group whose membership defines who gets to log in to this project"
+    default = "testbed-project-members"
+    type = string
+}
+
+variable "oidc_roles_map" {
+    description = "A map of CILogon groups to Omeka S roles"
+    type  = map(string)
+    default = {
+        "testbed-project-admins"      = "global_admin"
+        "testbed-project-researchers" = "researcher"
+    }
+}
+
+variable "oidc_hide_local_login" {
+    description = "Whether to hide the option to log in with local accounts"
+    type = bool
+    default = false
+}
+
+variable "omeka_admin_email" {
+    description = "Email address for the local admin account"
+    default = "example@curated-collections.cloud.edu.au"
+    type = string
+}
+
+variable "omeka_admin_user" {
+    description = "User name for the local admin account"
+    default = "Local Admin"
+    type = string
+}
+
+variable "omeka_project_title" {
+    description = "The title for the Omeka instance"
+    default = "Curated Collections Testbed"
+    type = string
+}
+
+variable "omeka_site_title" {
+    description = "The title for the Omeka instance's public site`"
+    default = "Site"
+    type = string
+}
+
+variable "omeka_site_slug" {
+    description = "The url path (slug) for the public site"
+    default = "site"
+    type = string
+}
+
+
