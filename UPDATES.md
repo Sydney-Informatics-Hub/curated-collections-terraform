@@ -7,16 +7,15 @@ are required, and where no local customisation of the Omeka S filesystem
 The update process will be implemented as an extension to this
 Terraform module.
 
+![A diagram showing the stages of running an update](docs/update-process.drawio.png)
+
+## Initial state
+
 The starting point is a docker-compose stack running on Nectar with an
-existing omeka-s container image, being served via a Caddy image.
-
-## Backup
-
-A static dump of the SQL and file assets is made before updating.
+existing omeka-s container image, being served via a Caddy image. A static dump of the SQL and file assets is made before updating.
 
 ## Deploy new image in test mode
 
-![A diagram showing the stages of running an update](docs/update-process.drawio.png)
 
 The target image should be hosted on ARCOS. The docker-compose stack is
 modified to start a new container running the new image. The new
