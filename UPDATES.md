@@ -2,7 +2,8 @@
 
 This update process covers the simplest case where no database migrations
 are required, and where no local customisation of the Omeka S filesystem
-(new modules or themes) have been installed.
+(new modules or themes) have been installed. A note on local customisation
+is at the end of this document.
 
 The update process will be implemented as an extension to this
 Terraform module.
@@ -57,3 +58,14 @@ It may be desirable to automatically install some modules - this can be
 added to the update application script which brings installed module
 records up-to-date. This will be decided on a case-by-case basis when
 preparing updated images.
+
+## Local customisations
+
+Local customisations for an Omeka S instance are most likely to be
+new themes (which control the appearance of public websites) and
+new modules. The proposed way to manage these and still allow automated updates of the Omeka S container image is for themes to be mounted into the
+docker container as a volume. Modules may require a more complicated
+setup where instance-specific modules are installed in a custom container
+which is built on top of a standard Curated Collections container - if
+this is the case, updates will require rebuilding the container and
+redeploying with the automated test framework proposed above.
