@@ -39,8 +39,8 @@ first version.
 If the automated tests pass, the update is applied:
 
 - the updated image is given write access to the database
-- the production caddy endpoint is swapped to serve the updated image
 - where required, module records in the database are updated to match the installed versions in the image
+- the production caddy endpoint is swapped to serve the updated image
 - the old image is shut down
 
 ## Failed tests
