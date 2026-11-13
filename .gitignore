@@ -20,8 +20,8 @@ wheels/
 .terraform.lock.hcl
 
 # Variables files with secrets
-oidc-variables.tf
-openstack-variables.tf
+oidc.tfvars
+openstack.tfvars
 
 # Openrc
 
