@@ -42,6 +42,7 @@ locals {
 		hostname = "${name}.${var.cc_domain}"
     		tls_admin_email = var.tls_admin_email
     	    })
+
 	}
     }
 }
