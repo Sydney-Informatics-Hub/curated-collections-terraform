@@ -59,4 +59,3 @@ variable "omeka_site_slug" {
     type = string
 }
 
-
