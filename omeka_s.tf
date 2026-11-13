@@ -7,7 +7,7 @@ resource "terraform_data" "project" {
 
   connection {
     type        = "ssh"
-    host        = openstack_networking_floatingip_v2.vm.address
+    host        = openstack_networking_floatingip_v2.floatip.address
     user        = "ubuntu"
     private_key = file(var.ssh_private_key_path)
   }
@@ -41,3 +41,5 @@ resource "terraform_data" "project" {
     ]
   }
 }
+
+

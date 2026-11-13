@@ -11,11 +11,15 @@
 locals {
     omeka_build_admin_email = "admin-tmp@curated-collections.edu.au"
     omeka_build_site_slug = "temp-site"
+    hostname = var.cc_prefix
 
     # project_rendered has the config files for each project, as rendered with values
     # from var.projects
 
-    project_rendered = {
+    caddyfile_top = templatefile("${path.module}/templates/Caddyfile.tpl", {
+    })
+
+    rendered = {
 	for name, p in var.projects: name => {
 
     	    hostname = "${name}.${var.cc_domain}"
@@ -26,7 +30,20 @@ locals {
                 mariadb_image = "${p.mariadb_image}"
             })
 
-    	    oidc_config = jsonencode({
+            env = templatefile("${path.module}/templates/env", {
+		mariadb_password = random_password.mariadb_password[name].result
+        	mariadb_root_password = random_password.mariadb_root_password[name].result
+        	omeka_admin_password = random_password.omeka_admin_password[name].result
+        	omeka_build_admin_email = local.omeka_build_admin_email
+		omeka_build_site_slug = local.omeka_build_site_slug
+        	omeka_admin_email = p.omeka_admin_email
+       		omeka_admin_user = p.omeka_admin_user
+		omeka_project_title = p.omeka_project_title
+        	omeka_site_slug = p.omeka_site_slug
+        	omeka_site_title = p.omeka_site_title
+            })
+
+     	    oidc_config = jsonencode({
     	        oidc_base_url = "${p.base_url}"
   		oidc_idp_discovery_url = "${var.oidc_idp_discovery_url}"
         	oidc_client_id = "${var.oidc_client_id}"
@@ -38,7 +55,7 @@ locals {
         	oidc_roles_default = ""
     	    })
 
-            caddyfile = templatefile("${path.module}/templates/Caddyfile.tpl", {
+            caddyfile = templatefile("${path.module}/templates/instance_Caddyfile.tpl", {
 		hostname = "${name}.${var.cc_domain}"
     		tls_admin_email = var.tls_admin_email
     	    })

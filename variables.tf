@@ -43,6 +43,11 @@ variable "openstack_password" {
     sensitive = true
 }
 
+variable "ssh_private_key_path" {
+    description = "Path to the ssh key for the server"
+    type =  string
+}
+
 variable "nectar_project_id" {
     description = "The Nectar project id"
     type = string
