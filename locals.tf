@@ -30,7 +30,7 @@ locals {
 			})
 
 			oidc_config = jsonencode({
-				oidc_base_url = "${p.base_url}"
+				oidc_base_url = "https://${name}.${var.cc_domain}"
 				oidc_idp_discovery_url = "${var.oidc_idp_discovery_url}"
 				oidc_client_id = "${var.oidc_client_id}"
 				oidc_client_secret = "${var.oidc_client_secret}"

@@ -74,7 +74,8 @@ variable "projects" {
   description = "Omeka S instances hosted on the shared VM, keyed by short project slug"
   type = map(object({
 	hostname    = string
-	omeka_image = string
+	omeka_s_image = string
+	mariadb_image = string
 	state       = optional(string, "running")    # running | stopped
 
 	owner_email = string
@@ -112,7 +113,12 @@ variable "projects" {
   }
 
   validation {
-	condition     = alltrue([for _, p in var.projects : !endswith(p.omeka_image, ":latest")])
+	condition     = alltrue([for _, p in var.projects : !endswith(p.omeka_s_image, ":latest")])
+	error_message = "Pin image versions; :latest is not allowed."
+  }
+
+  validation {
+	condition     = alltrue([for _, p in var.projects : !endswith(p.mariadb_image, ":latest")])
 	error_message = "Pin image versions; :latest is not allowed."
   }
 

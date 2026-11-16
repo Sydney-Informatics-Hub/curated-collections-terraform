@@ -39,12 +39,12 @@ resource "terraform_data" "omeka_s" {
 	}
 
 	provisioner "file" {
-		content     = random_password.mariadb_root_password[name].result
+		content     = random_password.mariadb_root_password[each.key].result
 		destination = "/srv/projects/${each.key}/secrets/mariadb_root_password.txt"
 	}
 
 	provisioner "file" {
-		content     = random_password.omeka_admin_password[name].result
+		content     = random_password.omeka_admin_password[each.key].result
 		destination = "/srv/projects/${each.key}/secrets/omeka_admin_password.txt"
 	}
 
