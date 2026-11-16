@@ -23,6 +23,7 @@ wheels/
 oidc.tfvars
 openstack.tfvars
 
-# Openrc
+# Openrc and Nectar credentials
 
 *-openrc.sh
+nectar-backend-credentials.sh
