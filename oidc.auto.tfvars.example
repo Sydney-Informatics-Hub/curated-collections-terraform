@@ -1,0 +1,10 @@
+# OIDC settings which are the same for all CC projects - copy to
+# oidc.auto.tfvars and fill in. oidc.auto.tfvars is in .gitignore:
+# never commit it.
+
+# Project-specific OIDC settings (the group which gates access and the
+# mapping to Omeka S roles) are in projects.auto.tfvars
+
+oidc_idp_discovery_url = "https://cilogon.aaf.edu.au/.well-known/openid-configuration"
+oidc_client_id         = "CLIENT_ID"
+oidc_client_secret     = "CLIENT_SECRET"

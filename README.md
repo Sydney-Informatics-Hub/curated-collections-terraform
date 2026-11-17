@@ -3,6 +3,9 @@
 This is a Terraform module to install the Curated Collections
 distribution of Omeka S to Nectar via its OpenStack API.
 
+**New operators:** see [docs/provisioning.md](docs/provisioning.md) for
+step-by-step setup and how to add a new Omeka S project.
+
 ## What the module does
 
 The module creates the following on Nectar:
@@ -83,11 +86,11 @@ The Terraform module generates random passwords for the database (used
 when the Omeka S container communicates with MariaDB) and for the
 local admin user.
 
-You can get the local admin password with the command
+You can get a project's local admin password with the command
 
-    > terraform output -raw omeka_admin_password
+    > echo 'nonsensitive(random_password.omeka_admin_password["<project>"].result)' | terraform console
 
-You shouldn't need to use the db passwords, but you can get them using the same command with db_password or db_root_password as the second argument.
+You shouldn't need to use the db passwords, but you can get them the same way using `mariadb_password` or `mariadb_root_password`.
 
 ## OIDC
 

@@ -20,8 +20,8 @@ wheels/
 .terraform.lock.hcl
 
 # Variables files with secrets
-oidc.tfvars
-openstack.tfvars
+oidc.auto.tfvars
+openstack.auto.tfvars
 
 # Openrc and Nectar credentials
 

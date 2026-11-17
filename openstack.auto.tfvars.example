@@ -1,0 +1,14 @@
+# Openstack and Nectar settings to be kept out of Git 
+
+# The email you log in to the Nectar dashboard with
+openstack_user = "USER_EMAIL"
+
+# Nectar API password (NOT your institutional password). Reset it at https://dashboard.rc.nectar.org.au/settings/reset-password/
+openstack_password = "API_PASSWORD"
+
+# From the downloaded OpenStack RC file (OS_PROJECT_ID / OS_PROJECT_NAME)
+nectar_project_id   = "PROJECT_ID"
+nectar_project_name = "PROJECT_NAME"
+
+# Absolute path to the private key for the key pair
+ssh_private_key_path = "PRIVATE_KEY_PATH"
