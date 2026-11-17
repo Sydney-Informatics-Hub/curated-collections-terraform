@@ -26,9 +26,6 @@ services:
       MARIADB_USER: omekas
       MARIADB_HOST: omeka-s-db
       MARIADB_PORT: 3306
-      PHP_UPLOAD_MAX_FILE_SIZE: ${php_upload_max_file_size}
-      PHP_POST_MAX_SIZE: ${php_post_max_size}
-      PHP_MEMORY_LIMIT: ${php_memory_limit}
     networks:
       proxy:
         aliases:
