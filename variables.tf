@@ -92,11 +92,11 @@ variable "projects" {
 	omeka_site_slug=optional(string, "site")
 
 	# Runtime sizing
-	mem_limit              = optional(string, "768m")
-	cpus                   = optional(number, 1.0)
-	php_memory_limit       = optional(string, "512M")
-	upload_max_filesize    = optional(string, "120M")
-	post_max_size          = optional(string, "120M")
+	mem_limit               = optional(string, "768m")
+	cpus                    = optional(number, 1.0)
+	php_memory_limit        = optional(string, "512M")
+	php_upload_max_filesize = optional(string, "120M")
+	php_post_max_size       = optional(string, "120M")
 
 	# Extra hostnames that should redirect to the canonical one
 	aliases = optional(list(string), [])

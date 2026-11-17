@@ -9,6 +9,7 @@ services:
         condition: service_healthy
     volumes:
       - omeka-s-app:/var/www/html
+      - ./cc-omeka.ini:/usr/local/etc/php/conf.d/cc-omeka.ini:ro
     secrets:
       - mariadb_password
       - omeka_admin_user
