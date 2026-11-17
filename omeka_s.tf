@@ -1,4 +1,7 @@
 
+# this resource copies the per-project config and secrets
+# and starts docker compose for each of them
+
 resource "terraform_data" "omeka_s" {
 	for_each = var.projects
 
@@ -21,11 +24,6 @@ resource "terraform_data" "omeka_s" {
 			"sudo mkdir -p /srv/caddy/sites/${each.key}",
 			"sudo chown ubuntu /srv/caddy/sites/${each.key}"
 		]
-	}
-
-	provisioner "file" {
-		content     = local.rendered[each.key].compose
-		destination = "/srv/projects/${each.key}/compose.yml"
 	}
 
 	provisioner "file" {
@@ -84,17 +82,23 @@ resource "terraform_data" "omeka_s" {
 	}
 
 	provisioner "file" {
-		content     = local.rendered[each.key].caddy
-		destination = "/srv/caddy/sites/${each.key}.caddy"
+		content     = local.rendered[each.key].compose
+		destination = "/srv/projects/${each.key}/compose.yml"
 	}
 
-	provisioner "remote-exec" {
-		inline = [
-			"chmod 600 /srv/projects/${each.key}/.env",
-			"cd /srv/projects/${each.key} && docker compose -p ${each.key} up -d",
-			"docker exec caddy caddy reload --config /etc/caddy/Caddyfile",
-		]
+	provisioner "file" {
+		content     = local.rendered[each.key].caddyfile
+		destination = "/srv/caddy/sites/${each.key}/Caddyfile"
 	}
+
+	# provisioner "remote-exec" {
+	# 	inline = [
+	# 		"chmod 700 /srv/projects/${each.key}/secrets",
+	# 		"chmod 600 /srv/projects/${each.key}/secrets/*",
+	# 		"cd /srv/projects/${each.key} && docker compose -p ${each.key} up -d",
+	# 		"docker exec caddy caddy reload --config /etc/caddy/Caddyfile",
+	# 	]
+	# }
 }
 
 

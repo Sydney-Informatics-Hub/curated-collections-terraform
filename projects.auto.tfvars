@@ -7,8 +7,8 @@ projects = {
 		owner_name  = "Mike Lynch"
 		oidc_group  = "testbed1" 
 		oidc_roles_map = {
-			admin = "Admin"
-			user = "User"
+			admin = "global_admin"
+			user = "editor"
 		}
 		omeka_admin_email = "admin@curated-collections.edu.au"
 		omeka_s_image = "registry.rc.nectar.org.au/curated-collections/cc-omeka-s@sha256:2300ff113b48f0a0757264c22b296da373fed7abe2c6569d6959610440d83073"
@@ -21,8 +21,8 @@ projects = {
 		owner_name = "Mike Lynch"
 		oidc_group  = "testbed2" 
 		oidc_roles_map = {
-			admin = "Admin"
-			user = "User"
+			admin = "global_admin"
+			user = "editor"
 		}
 		omeka_admin_email = "admin@curated-collections.edu.au"
 		omeka_s_image = "registry.rc.nectar.org.au/curated-collections/cc-omeka-s@sha256:2300ff113b48f0a0757264c22b296da373fed7abe2c6569d6959610440d83073"

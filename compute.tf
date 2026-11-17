@@ -13,7 +13,8 @@ resource "openstack_compute_instance_v2" "instance" {
     availability_zone = "ardc-syd-1"
     user_data = templatefile("${path.module}/templates/cloud-init.yaml.tpl", {
         hostname = local.hostname
-        caddyfile_content = local.caddyfile_top
+        caddyfile_content = local.proxy_caddyfile
+        compose_content = local.proxy_compose
     })
 }
 

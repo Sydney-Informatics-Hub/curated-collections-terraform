@@ -1,20 +1,6 @@
-name: omeka-s
+name: ${project}
 
 services:
-  caddy:
-    image: caddy:2.10.2
-    depends_on:
-      - omeka-s-app
-    volumes:
-      - caddy-data:/data
-      - caddy-config:/config
-      - ./Caddyfile:/etc/caddy/Caddyfile
-    ports:
-      - '80:80'
-      - '443:443'
-    networks:
-      - omeka-s-network
-    restart: unless-stopped
 
   omeka-s-app:
     image: "${omeka_s_image}"
@@ -39,10 +25,11 @@ services:
       MARIADB_USER: omekas
       MARIADB_HOST: omeka-s-db
       MARIADB_PORT: 3306
-    ports:
-      - '127.0.0.1:8080:80'
     networks:
-      - omeka-s-network
+      proxy:
+        aliases:
+          - ${project}-omeka
+      backend: {}
     command: /docker-entrypoint.sh
     restart: unless-stopped
 
@@ -59,7 +46,7 @@ services:
       MARIADB_PASSWORD_FILE: /run/secrets/mariadb_password
       MARIADB_ROOT_PASSWORD_FILE: /run/secrets/mariadb_root_password
     networks:
-      - omeka-s-network
+      - backend
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
@@ -67,9 +54,10 @@ services:
       retries: 10
 
 networks:
-  omeka-s-network:
-    driver: bridge
-    name: "omeka-s-network"
+  proxy:
+     external: true
+  backend:
+     internal: true
 
 volumes:
   omeka-s-db:

@@ -1,2 +1,2 @@
-import /srv/caddy/sites/*.caddy
+import /etc/caddy/sites/*/Caddyfile
 

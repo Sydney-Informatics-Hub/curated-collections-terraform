@@ -10,10 +10,10 @@ system_info:
     groups: [docker]
 
 write_files:
-  - path: /home/ubuntu/omeka-s/Caddyfile
+  - path: /srv/caddy/Caddyfile
     encoding: b64
     content: "${base64encode(caddyfile_content)}"
+  - path: /srv/proxy/docker-compose.yml
+    encoding: b64
+    content: "${base64encode(compose_content)}"
 
-runcmd:
-  - [ cd, /home/ubuntu/omeka-s ]
-  - [ docker, compose, up, -d ]

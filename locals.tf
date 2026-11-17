@@ -13,24 +13,27 @@ locals {
 	omeka_build_site_slug = "temp-site"
 	hostname = var.cc_prefix
 
-	# project_rendered has the config files for each project, as rendered with values
-	# from var.projects
+	# top-level reverse proxy config
 
-	caddyfile_top = templatefile("${path.module}/templates/Caddyfile.tpl", {
-	})
+	proxy_caddyfile = templatefile("${path.module}/templates/Caddyfile.tpl", {})
+	proxy_compose = templatefile("${path.module}/templates/proxy-docker-compose.yml.tpl", {})
+
+	# rendered has the config files for each project, as rendered with values
+	# from var.projects
 
 	rendered = {
 		for name, p in var.projects: name => {
-			hostname = "${name}.${var.cc_domain}"
-			base_url = "https://${name}.${var.cc_domain}"
+			full_domain = "${p.hostname}.${var.cc_domain}"
+			base_url = "https://${p.hostname}.${var.cc_domain}"
 
-			compose = templatefile("${path.module}/templates/docker-compose.yml.tpl", {
+			compose = templatefile("${path.module}/templates/project-docker-compose.yml.tpl", {
+				project = p.hostname
 				omeka_s_image = "${p.omeka_s_image}"
 				mariadb_image = "${p.mariadb_image}"
 			})
 
 			oidc_config = jsonencode({
-				oidc_base_url = "https://${name}.${var.cc_domain}"
+				oidc_base_url = "https://${p.hostname}.${var.cc_domain}"
 				oidc_idp_discovery_url = "${var.oidc_idp_discovery_url}"
 				oidc_client_id = "${var.oidc_client_id}"
 				oidc_client_secret = "${var.oidc_client_secret}"
@@ -42,7 +45,7 @@ locals {
 			})
 
 			caddyfile = templatefile("${path.module}/templates/instance_Caddyfile.tpl", {
-				hostname = "${name}.${var.cc_domain}"
+				hostname = "${p.hostname}.${var.cc_domain}"
 				tls_admin_email = var.tls_admin_email
 			})
 
