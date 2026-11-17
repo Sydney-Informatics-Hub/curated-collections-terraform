@@ -1,0 +1,5 @@
+
+
+upload_max_filesize = ${php_upload_max_filesize}
+post_max_size = ${php_post_max_size}
+memory_limit = ${php_memory_limit}

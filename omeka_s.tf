@@ -87,6 +87,11 @@ resource "terraform_data" "omeka_s" {
 	}
 
 	provisioner "file" {
+		content     = local.rendered[each.key].php_conf
+		destination = "/srv/projects/${each.key}/cc-omeka.ini"
+	}
+
+	provisioner "file" {
 		content     = local.rendered[each.key].caddyfile
 		destination = "/srv/caddy/sites/${each.key}/Caddyfile"
 	}
