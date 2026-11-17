@@ -46,6 +46,7 @@ locals {
 
 			caddyfile = templatefile("${path.module}/templates/instance_Caddyfile.tpl", {
 				hostname = "${p.hostname}.${var.cc_domain}"
+				project = p.hostname
 				tls_admin_email = var.tls_admin_email
 			})
 
