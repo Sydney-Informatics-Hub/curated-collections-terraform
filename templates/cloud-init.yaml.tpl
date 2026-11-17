@@ -17,3 +17,6 @@ write_files:
     encoding: b64
     content: "${base64encode(compose_content)}"
 
+runcmd:
+  - [ cd, /srv/proxy ]
+  - [ docker, compose, up, -d ]

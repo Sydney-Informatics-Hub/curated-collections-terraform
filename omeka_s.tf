@@ -91,14 +91,14 @@ resource "terraform_data" "omeka_s" {
 		destination = "/srv/caddy/sites/${each.key}/Caddyfile"
 	}
 
-	# provisioner "remote-exec" {
-	# 	inline = [
-	# 		"chmod 700 /srv/projects/${each.key}/secrets",
-	# 		"chmod 600 /srv/projects/${each.key}/secrets/*",
-	# 		"cd /srv/projects/${each.key} && docker compose -p ${each.key} up -d",
-	# 		"docker exec caddy caddy reload --config /etc/caddy/Caddyfile",
-	# 	]
-	# }
+	provisioner "remote-exec" {
+		inline = [
+			"chmod 700 /srv/projects/${each.key}/secrets",
+			"chmod 600 /srv/projects/${each.key}/secrets/*",
+			"cd /srv/projects/${each.key} && docker compose -p ${each.key} up -d",
+			"docker exec caddy caddy reload --config /etc/caddy/Caddyfile",
+		]
+	}
 }
 
 
