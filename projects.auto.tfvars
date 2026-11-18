@@ -6,8 +6,8 @@
 		oidc_hide_local_login = false
 		oidc_group  = "alpha-project-members" 
 		oidc_roles_map = {
-			admin = "global_admin"
-			user = "editor"
+			alpha-project-admins = "global_admin"
+			alpha-project-researchers = "editor"
 		}
 		omeka_project_title = "Alpha"
 		omeka_admin_email = "admin@curated-collections.edu.au"
@@ -22,8 +22,8 @@
 		oidc_hide_local_login = false
 		oidc_group  = "beta-project-members" 
 		oidc_roles_map = {
-			admin = "global_admin"
-			user = "editor"
+			beta-project-admins = "global_admin"
+			beta-project-researchers = "editor"
 		}
 		omeka_project_title = "Beta"
 		omeka_admin_email = "admin@curated-collections.edu.au"
@@ -38,8 +38,8 @@
 		oidc_hide_local_login = false
 		oidc_group  = "gamma-project-members" 
 		oidc_roles_map = {
-			admin = "global_admin"
-			user = "editor"
+			gamma-project-admins = "global_admin"
+			gamma-project-researchers = "editor"
 		}
 		omeka_project_title = "Gamma"
 		omeka_admin_email = "admin@curated-collections.edu.au"

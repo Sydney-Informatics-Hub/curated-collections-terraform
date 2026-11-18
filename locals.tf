@@ -36,7 +36,7 @@ locals {
 				php_memory_limit = p.php_memory_limit
 				php_post_max_size = p.php_post_max_size
 				php_upload_max_filesize = p.php_upload_max_filesize
-			}) 
+			})
 
 			oidc_config = jsonencode({
 				oidc_base_url = "https://${p.hostname}.${var.cc_domain}"
