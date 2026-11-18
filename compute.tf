@@ -3,8 +3,8 @@
 resource "openstack_compute_instance_v2" "instance" {
     depends_on = [openstack_networking_router_interface_v2.attach]
     name = "${var.cc_prefix}-network-instance"
-    image_name = "NeCTAR Ubuntu 22.04 LTS (Jammy) amd64 (with Docker)"
-    flavor_name = "m3.small"
+    image_name = var.vm_image
+    flavor_name = var.vm_flavor
     key_pair = "Curated-Collections-SIH"
     security_groups = ["default", "ssh"]
     network {

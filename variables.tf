@@ -7,8 +7,18 @@ variable "cc_domain" {
 }
 
 variable "cc_prefix" {
-	 description = "Used as a namespace for the network, subnet and compute instance"
-	 type = string
+	description = "Used as a namespace for the network, subnet and compute instance"
+	type = string
+}
+
+variable "vm_image" {
+	description = "The Nectar image to use for the VM"
+	type = string
+}
+
+variable "vm_flavor" {
+	description = "The Nectar VM flavour"
+	type = string
 }
 
 variable "tls_admin_email" {
