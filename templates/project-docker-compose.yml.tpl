@@ -10,6 +10,7 @@ services:
     volumes:
       - omeka-s-app:/var/www/html
       - ./cc-omeka.ini:/usr/local/etc/php/conf.d/cc-omeka.ini:ro
+      - /pvol/projects/${project}/files:/var/www/html/public/files
     secrets:
       - mariadb_password
       - omeka_admin_user
