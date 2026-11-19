@@ -10,27 +10,14 @@ step-by-step setup and how to add a new Omeka S project.
 
 The module creates the following on Nectar:
 
-- a network
-- a subnet
-- a router
+- a network, subnet, router and interface
 - a compute instance
-- a fixed IP attached to the compute instance
-- a DNS record for ${project}.curated-collections.cloud.edu.au pointing at the IP
+- a fixed IP and a port attached to the compute instance and the network interface
+- several Omeka S instances (these are referred to as "projects")
+- DNS records for each project, pointing at the fixed IP
+- a Caddy reverse proxy which routes incoming requests to the correct Omeka S instances based on the hostname
 
-The compute instance is configured with [cloud-init](https://cloud-init.io/) - this is a cross-platform system for initialising and configuring cloud servers.
-
-The basis for this is a cloud-init.yaml which the Terraform module
-populates and copies to the new instance. Cloud-init works by default
-on all Nectar instances, and it uses the contents of the
-cloud-init.yaml file to set up the following:
-
-- a docker-compose.yml file which refers to the Omeka S and MariaDB image in the [Nectar container registry](https://registry.rc.nectar.org.au/)
-- a Caddyfile which does TLS termination for the project URL
-- a bunch of initial values for the Omeka S app, like the local
- admin user credentials, the project and site title etc (see the Configuration section below for a full list)
-- The OIDC config. Some of these are project-specific: the CILogon groups which define who can access the instance backend and mappings to Omeka S roles. Some are not (the OICD client ID and secret). Full details are in the configuration section below. 
-
-![A diagram showing what this Terraform module deploys](docs/release_one.drawio.png)
+![A diagram showing what this Terraform module deploys](docs/release_2.drawio.png)
 
 To plan the installation, run
 
