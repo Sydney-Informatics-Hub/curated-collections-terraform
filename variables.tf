@@ -98,6 +98,18 @@ variable "omeka_build_site_slug" {
 	default = "temp-site"
 }
 
+variable "omeka_uid" {
+	description = "The UID of the omeka user (www-data) from the Docker image"
+	type = number
+	default = 33
+}
+
+variable "omeka_gid" {
+	description = "The GID of the omeka user (www-data) from the Docker image"
+	type = number
+	default = 33
+}
+
 variable "projects" {
   description = "Omeka S instances hosted on the shared VM, keyed by short project slug"
   type = map(object({

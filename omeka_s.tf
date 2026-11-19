@@ -15,14 +15,21 @@ resource "terraform_data" "omeka_s" {
 		private_key = file(var.ssh_private_key_path)
 	}
 
+	# Setting the omeka UID:GID on the project's volume storage
+        # is required so that the dockerised Omeka can write files 
+        # there. 
+
 	provisioner "remote-exec" {
 		inline = [
 			"sudo mkdir -p /srv/projects/${each.key}",
 			"sudo chown ubuntu /srv/projects/${each.key}",
 			"sudo mkdir -p /srv/projects/${each.key}/secrets",
-			"sudo chown ubuntu /srv/projects/${each.key}/secrets",
+			"sudo chown ubuntu:ubuntu /srv/projects/${each.key}/secrets",
 			"sudo mkdir -p /srv/caddy/sites/${each.key}",
-			"sudo chown ubuntu /srv/caddy/sites/${each.key}"
+			"sudo chown ubuntu /srv/caddy/sites/${each.key}",
+			"sudo mkdir -p /pvol/projects/${each.key}/files",
+			"sudo chown ubuntu:ubuntu /pvol/projects/${each.key}/",
+			"sudo chown ${var.omeka_uid}:${var.omeka_gid} /pvol/projects/${each.key}/"
 		]
 	}
 
