@@ -1,5 +1,6 @@
 # Global config variables 
 
+
 variable "cc_domain" {
 	description = "The base domain for curated collections"
 	type = string
@@ -9,6 +10,18 @@ variable "cc_domain" {
 variable "cc_prefix" {
 	description = "Used as a namespace for the network, subnet and compute instance"
 	type = string
+}
+
+variable "availability_zone" {
+	description = "The Nectar availability zone"
+	type = string
+	default = "ardc-syd-1"
+}
+
+variable "ip_pool" {
+	description = "The Nectar floating IP pool"
+	type = string
+	default = "ardc-syd"
 }
 
 variable "vm_image" {
@@ -21,10 +34,15 @@ variable "vm_flavor" {
 	type = string
 }
 
+variable "volume_size" {
+	description = "Volume storage size in gigabytes"
+	type = number
+}
+
 variable "tls_admin_email" {
 	description = "The admin email for TLS"
 	type = string
-} 
+}
 
 variable "oidc_idp_discovery_url" {
 	description = "OIDC IDP discovery url"

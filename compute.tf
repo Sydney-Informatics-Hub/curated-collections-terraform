@@ -10,7 +10,7 @@ resource "openstack_compute_instance_v2" "instance" {
     network {
         uuid = openstack_networking_network_v2.private_network.id
     }
-    availability_zone = "ardc-syd-1"
+    availability_zone = var.availability_zone
     user_data = templatefile("${path.module}/templates/cloud-init.yaml.tpl", {
         hostname = local.hostname
         caddyfile_content = local.proxy_caddyfile
@@ -24,8 +24,20 @@ data "openstack_networking_port_v2" "port" {
   device_id = openstack_compute_instance_v2.instance.id
 }
 resource "openstack_networking_floatingip_v2" "floatip" {
-  pool = "ardc-syd"
+  pool = var.ip_pool
   port_id = data.openstack_networking_port_v2.port.port_id
 }
 
+# Storage - note that this will still need to be formatted to be
+# useful
 
+resource "openstack_blockstorage_volume_v3" "volume" {
+    name = "${var.cc_prefix}-storage"
+    size = var.volume_size
+    availability_zone = var.availability_zone
+}
+
+resource "openstack_compute_volume_attach_v2" "volume" {
+    instance_id = openstack_compute_instance_v2.instance.id
+    volume_id = openstack_blockstorage_volume_v3.volume.id
+}
