@@ -25,8 +25,8 @@ resource "terraform_data" "omeka_s" {
 			"sudo chown ubuntu ${var.docker_dir}/${each.key}",
 			"sudo mkdir -p ${var.docker_dir}/${each.key}/secrets",
 			"sudo chown ubuntu:ubuntu ${var.docker_dir}/${each.key}/secrets",
-			"sudo mkdir -p ${var.caddy_dir}/${each.key}",
-			"sudo chown ubuntu ${var.caddy_dir}/${each.key}",
+			"sudo mkdir -p ${var.caddy_dir}/sites/${each.key}",
+			"sudo chown ubuntu ${var.caddy_dir}/sites/${each.key}",
 			"sudo mkdir -p ${var.volume_dir}/${each.key}/files",
 			"sudo chown ubuntu:ubuntu ${var.volume_dir}/${each.key}/",
 			"sudo chown ${var.omeka_uid}:${var.omeka_gid} ${var.volume_dir}/${each.key}/"
@@ -100,7 +100,7 @@ resource "terraform_data" "omeka_s" {
 
 	provisioner "file" {
 		content     = local.rendered[each.key].caddyfile
-		destination = "${var.caddy_dir}/${each.key}/Caddyfile"
+		destination = "${var.caddy_dir}/sites/${each.key}/Caddyfile"
 	}
 
 	provisioner "remote-exec" {
@@ -108,7 +108,12 @@ resource "terraform_data" "omeka_s" {
 			"chmod 700 ${var.docker_dir}/${each.key}/secrets",
 			"chmod 600 ${var.docker_dir}/${each.key}/secrets/*",
 			"cd ${var.docker_dir}/${each.key} && docker compose -p ${each.key} up -d",
-			"docker exec caddy caddy reload --config ${var.proxy_caddyfile}",
+		]
+	}
+
+ 	provisioner "remote-exec" {
+		inline = [
+			"cd ${var.proxy_dir} && docker compose -f docker-compose.yml restart"
 		]
 	}
 }

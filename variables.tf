@@ -44,12 +44,10 @@ variable "proxy_caddyfile" {
 	type = string
 }
 
-
-variable "proxy_docker" {
-	description = "Where the proxy docker-compose is copied"
+variable "proxy_dir" {
+	description = "Directory where the proxy docker-compose is copied"
 	type = string
 }
-
 
 variable "docker_dir" {
 	description = "Directory where project docker compose directories are created"

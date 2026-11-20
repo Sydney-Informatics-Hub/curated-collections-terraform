@@ -15,7 +15,7 @@ resource "openstack_compute_instance_v2" "instance" {
         hostname = local.hostname
 	proxy_caddyfile = var.proxy_caddyfile
         proxy_caddyfile_content = local.proxy_caddyfile_content
-	proxy_docker = var.proxy_docker
+	proxy_dir = var.proxy_dir
         proxy_docker_content = local.proxy_docker_content
     })
 }
