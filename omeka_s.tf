@@ -28,8 +28,7 @@ resource "terraform_data" "omeka_s" {
 			"sudo mkdir -p ${var.caddy_dir}/sites/${each.key}",
 			"sudo chown ubuntu ${var.caddy_dir}/sites/${each.key}",
 			"sudo mkdir -p ${var.volume_dir}/${each.key}/files",
-			"sudo chown ubuntu:ubuntu ${var.volume_dir}/${each.key}/",
-			"sudo chown ${var.omeka_uid}:${var.omeka_gid} ${var.volume_dir}/${each.key}/"
+			"sudo chown -R ${var.omeka_uid}:${var.omeka_gid} ${var.volume_dir}/${each.key}/"
 		]
 	}
 
