@@ -17,5 +17,13 @@ vm_image = "NeCTAR Ubuntu 22.04 LTS (Jammy) amd64 (with Docker)"
 vm_flavor = "m3.large"
 volume_size = 200
 
+# where everything will be created on the server
+
+proxy_caddyfile = "/srv/caddy/Caddyfile"
+proxy_docker = "/srv/proxy/docker-compose.yml"
+docker_dir = "/srv/projects/"
+caddy_dir = "/srv/caddy/"
+volume_dir = "/pvol/projects/"
+
 omeka_build_admin_email = "admin-tmp@curated-collections.edu.au"
 omeka_build_site_slug = "temp-site"

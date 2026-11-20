@@ -10,12 +10,12 @@ system_info:
     groups: [docker]
 
 write_files:
-  - path: /srv/caddy/Caddyfile
+  - path: ${proxy_caddyfile}
     encoding: b64
-    content: "${base64encode(caddyfile_content)}"
-  - path: /srv/proxy/docker-compose.yml
+    content: "${base64encode(proxy_caddyfile_content)}"
+  - path: ${proxy_docker}
     encoding: b64
-    content: "${base64encode(compose_content)}"
+    content: "${base64encode(proxy_docker_content)}"
 
 runcmd:
   - [ cd, /srv/proxy ]

@@ -15,8 +15,8 @@ locals {
 
 	# top-level reverse proxy config
 
-	proxy_caddyfile = templatefile("${path.module}/templates/Caddyfile.tpl", {})
-	proxy_compose = templatefile("${path.module}/templates/proxy-docker-compose.yml.tpl", {})
+	proxy_caddyfile_content = templatefile("${path.module}/templates/Caddyfile.tpl", {})
+	proxy_docker_content = templatefile("${path.module}/templates/proxy-docker-compose.yml.tpl", {})
 
 	# rendered has the config files for each project, as rendered with values
 	# from var.projects

@@ -21,94 +21,94 @@ resource "terraform_data" "omeka_s" {
 
 	provisioner "remote-exec" {
 		inline = [
-			"sudo mkdir -p /srv/projects/${each.key}",
-			"sudo chown ubuntu /srv/projects/${each.key}",
-			"sudo mkdir -p /srv/projects/${each.key}/secrets",
-			"sudo chown ubuntu:ubuntu /srv/projects/${each.key}/secrets",
-			"sudo mkdir -p /srv/caddy/sites/${each.key}",
-			"sudo chown ubuntu /srv/caddy/sites/${each.key}",
-			"sudo mkdir -p /pvol/projects/${each.key}/files",
-			"sudo chown ubuntu:ubuntu /pvol/projects/${each.key}/",
-			"sudo chown ${var.omeka_uid}:${var.omeka_gid} /pvol/projects/${each.key}/"
+			"sudo mkdir -p ${var.docker_dir}/${each.key}",
+			"sudo chown ubuntu ${var.docker_dir}/${each.key}",
+			"sudo mkdir -p ${var.docker_dir}/${each.key}/secrets",
+			"sudo chown ubuntu:ubuntu ${var.docker_dir}/${each.key}/secrets",
+			"sudo mkdir -p ${var.caddy_dir}/${each.key}",
+			"sudo chown ubuntu ${var.caddy_dir}/${each.key}",
+			"sudo mkdir -p ${var.volume_dir}/${each.key}/files",
+			"sudo chown ubuntu:ubuntu ${var.volume_dir}/${each.key}/",
+			"sudo chown ${var.omeka_uid}:${var.omeka_gid} ${var.volume_dir}/${each.key}/"
 		]
 	}
 
 	provisioner "file" {
 		content     = local.rendered[each.key].oidc_config
-		destination = "/srv/projects/${each.key}/secrets/oidc_config.json"
+		destination = "${var.docker_dir}/${each.key}/secrets/oidc_config.json"
 	}
 
 	provisioner "file" {
 		content     = random_password.mariadb_password[each.key].result
-		destination = "/srv/projects/${each.key}/secrets/mariadb_password.txt"
+		destination = "${var.docker_dir}/${each.key}/secrets/mariadb_password.txt"
 	}
 
 	provisioner "file" {
 		content     = random_password.mariadb_root_password[each.key].result
-		destination = "/srv/projects/${each.key}/secrets/mariadb_root_password.txt"
+		destination = "${var.docker_dir}/${each.key}/secrets/mariadb_root_password.txt"
 	}
 
 	provisioner "file" {
 		content     = random_password.omeka_admin_password[each.key].result
-		destination = "/srv/projects/${each.key}/secrets/omeka_admin_password.txt"
+		destination = "${var.docker_dir}/${each.key}/secrets/omeka_admin_password.txt"
 	}
 
 	provisioner "file" {
 		content     = var.omeka_build_admin_email
-		destination = "/srv/projects/${each.key}/secrets/omeka_build_admin_email.txt"
+		destination = "${var.docker_dir}/${each.key}/secrets/omeka_build_admin_email.txt"
 	}
 
 	provisioner "file" {
 		content     = var.omeka_build_site_slug
-		destination = "/srv/projects/${each.key}/secrets/omeka_build_site_slug.txt"
+		destination = "${var.docker_dir}/${each.key}/secrets/omeka_build_site_slug.txt"
 	}
 
 	provisioner "file" {
 		content     = var.projects[each.key].omeka_admin_email
-		destination = "/srv/projects/${each.key}/secrets/omeka_admin_email.txt"
+		destination = "${var.docker_dir}/${each.key}/secrets/omeka_admin_email.txt"
 	}
 
 	provisioner "file" {
 		content     = var.projects[each.key].omeka_admin_user
-		destination = "/srv/projects/${each.key}/secrets/omeka_admin_user.txt"
+		destination = "${var.docker_dir}/${each.key}/secrets/omeka_admin_user.txt"
 	}
 
 	provisioner "file" {
 		content     = var.projects[each.key].omeka_project_title
-		destination = "/srv/projects/${each.key}/secrets/omeka_project_title.txt"
+		destination = "${var.docker_dir}/${each.key}/secrets/omeka_project_title.txt"
 	}
 
 	provisioner "file" {
 		content     = var.projects[each.key].omeka_site_slug
-		destination = "/srv/projects/${each.key}/secrets/omeka_site_slug.txt"
+		destination = "${var.docker_dir}/${each.key}/secrets/omeka_site_slug.txt"
 	}
 
 	provisioner "file" {
 		content     = var.projects[each.key].omeka_site_title
-		destination = "/srv/projects/${each.key}/secrets/omeka_site_title.txt"
+		destination = "${var.docker_dir}/${each.key}/secrets/omeka_site_title.txt"
 	}
 
 	provisioner "file" {
 		content     = local.rendered[each.key].compose
-		destination = "/srv/projects/${each.key}/compose.yml"
+		destination = "${var.docker_dir}/${each.key}/compose.yml"
 	}
 
 	provisioner "file" {
 		content     = local.rendered[each.key].php_conf
-		destination = "/srv/projects/${each.key}/cc-omeka.ini"
+		destination = "${var.docker_dir}/${each.key}/cc-omeka.ini"
 	}
 
 	provisioner "file" {
 		content     = local.rendered[each.key].caddyfile
-		destination = "/srv/caddy/sites/${each.key}/Caddyfile"
+		destination = "${var.caddy_dir}/${each.key}/Caddyfile"
 	}
 
 	provisioner "remote-exec" {
 		inline = [
-			"chmod 700 /srv/projects/${each.key}/secrets",
-			"chmod 600 /srv/projects/${each.key}/secrets/*",
-			"cd /srv/projects/${each.key} && docker compose -p ${each.key} up -d",
-			"docker exec caddy caddy reload --config /etc/caddy/Caddyfile",
+			"chmod 700 ${var.docker_dir}/${each.key}/secrets",
+			"chmod 600 ${var.docker_dir}/${each.key}/secrets/*",
+			"cd ${var.docker_dir}/${each.key} && docker compose -p ${each.key} up -d",
+			"docker exec caddy caddy reload --config ${var.proxy_caddyfile}",
 		]
 	}
 }

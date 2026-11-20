@@ -13,8 +13,10 @@ resource "openstack_compute_instance_v2" "instance" {
     availability_zone = var.availability_zone
     user_data = templatefile("${path.module}/templates/cloud-init.yaml.tpl", {
         hostname = local.hostname
-        caddyfile_content = local.proxy_caddyfile
-        compose_content = local.proxy_compose
+	proxy_caddyfile = var.proxy_caddyfile
+        proxy_caddyfile_content = local.proxy_caddyfile_content
+	proxy_docker = var.proxy_docker
+        proxy_docker_content = local.proxy_docker_content
     })
 }
 

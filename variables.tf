@@ -39,6 +39,33 @@ variable "volume_size" {
 	type = number
 }
 
+variable "proxy_caddyfile" {
+	description = "Where the proxy Caddyfile is copied"
+	type = string
+}
+
+
+variable "proxy_docker" {
+	description = "Where the proxy docker-compose is copied"
+	type = string
+}
+
+
+variable "docker_dir" {
+	description = "Directory where project docker compose directories are created"
+	type = string
+}
+
+variable "volume_dir" {
+	description = "Directory where project volume storage directories for uploads are created"
+	type = string
+}
+
+variable "caddy_dir" {
+	description = "Directory where project Caddyfiles are created"
+	type = string
+}
+
 variable "tls_admin_email" {
 	description = "The admin email for TLS"
 	type = string
