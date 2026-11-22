@@ -112,6 +112,4 @@ other user's items)
 
 # To do
 
-- set up automated backups
-- automatically dump out the database on teardown
-- modify this so that we can have a single Caddy and IP in front of a set of Omeka S stacks on the same Nectar instance
+Volume filesystem formatting on create

@@ -19,6 +19,9 @@ wheels/
 .terraform/
 .terraform.lock.hcl
 
+# Terrafom plans
+*.tfplan
+
 # Variables files with secrets
 oidc.auto.tfvars
 openstack.auto.tfvars
