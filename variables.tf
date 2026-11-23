@@ -8,7 +8,7 @@ variable "cc_domain" {
 }
 
 variable "cc_prefix" {
-	description = "Used as a namespace for the network, subnet and compute instance"
+	description = "Used to prefix names for the networking, compute and backup plumbing"
 	type = string
 }
 
