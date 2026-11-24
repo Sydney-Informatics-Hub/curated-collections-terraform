@@ -21,13 +21,17 @@ locals {
 	# rendered has the config files for each project, as rendered with values
 	# from var.projects
 
+	# note that p.hostname is user for the DNS entry, but name (the key of
+        # the project file) is used for the docker network - this is so that
+        # we can have a different DNS to the internal name for staging servers
+
 	rendered = {
 		for name, p in var.projects: name => {
 			full_domain = "${p.hostname}.${var.cc_domain}"
 			base_url = "https://${p.hostname}.${var.cc_domain}"
 
 			compose = templatefile("${path.module}/templates/project-docker-compose.yml.tpl", {
-				project = p.hostname
+				project = name
 				omeka_s_image = "${p.omeka_s_image}"
 				mariadb_image = "${p.mariadb_image}"
 			})
@@ -52,7 +56,7 @@ locals {
 
 			caddyfile = templatefile("${path.module}/templates/instance_Caddyfile.tpl", {
 				hostname = "${p.hostname}.${var.cc_domain}"
-				project = p.hostname
+				project = name
 				tls_admin_email = var.tls_admin_email
 			})
 
