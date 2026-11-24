@@ -40,6 +40,13 @@ the server will be lost for good. See the Todo section.
 
 ## Configuration
 
+All the values which are likely to change are stored in auto.tfvars files.
+The 'auto' means that Terraform will load them automatically.
+
+
+
+
+
 ### variables.tf
 
 Global config values which aren't secrets
@@ -115,4 +122,5 @@ other user's items)
 
 # To do
 
-Volume filesystem formatting on create
+The block storage needs to be manually formatted and mounted into the
+compute instance - this should be automated with cloud-init.
