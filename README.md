@@ -16,6 +16,9 @@ The module creates the following on Nectar:
 - several Omeka S instances (these are referred to as "projects")
 - DNS records for each project, pointing at the fixed IP
 - a Caddy reverse proxy which routes incoming requests to the correct Omeka S instances based on the hostname
+- a storage volume, used for media attachments and custom themes
+- an object storage container, used for daily backups
+- a scoped credential to let the backup scripts write to the object storage
 
 ![A diagram showing what this Terraform module deploys](docs/release_2.drawio.png)
 
