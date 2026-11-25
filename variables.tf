@@ -1,4 +1,4 @@
-# Global config variables 
+# Variable declarations and validation rules
 
 
 variable "cc_domain" {

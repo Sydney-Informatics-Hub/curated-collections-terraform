@@ -32,6 +32,7 @@ locals {
 
 			compose = templatefile("${path.module}/templates/project-docker-compose.yml.tpl", {
 				project = name
+				volume_dir = var.volume_dir
 				omeka_s_image = "${p.omeka_s_image}"
 				mariadb_image = "${p.mariadb_image}"
 			})
